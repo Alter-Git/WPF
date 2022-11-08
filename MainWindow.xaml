@@ -1,0 +1,73 @@
+﻿<Window x:Class="MyScripts.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyScripts"
+        mc:Ignorable="d"
+        Title="Tools" Height="550" Width="500" ResizeMode="NoResize">
+
+    <Window.Resources>
+        <Style TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
+    </Window.Resources>
+
+    <Canvas>
+        <TabControl Height="550" Width="500" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <TabItem Header="Explorer">
+                <Canvas Height="524" HorizontalAlignment="Center" Width="495">
+                    <ListView Name="listview_files" Height="407" Width="450" d:ItemsSource="{d:SampleData ItemCount=2}"  Canvas.Left="10" Canvas.Top="39" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding name}" />
+                                <GridViewColumn Header="Extension" Width="70" DisplayMemberBinding="{Binding extension}"/>
+                                <GridViewColumn Header="Modified Date" Width="120" DisplayMemberBinding="{Binding modifiedDate}"/>
+                                <GridViewColumn Width="60" Header="Writable">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Image Source="{Binding writiableStatusImage}"  MaxHeight="20" MaxWidth="20" Stretch="UniformToFill"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                    <TextBox Name="tab_explorer_text_path" Canvas.Left="10" TextWrapping="Wrap" Text="C:/" Canvas.Top="10" Width="393" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Button VerticalContentAlignment="Top" Canvas.Left="414" Canvas.Top="10" VerticalAlignment="Center" Width="46" Height="18" Click="Tab_Explorer_Button_Scan_Click" HorizontalAlignment="Left">
+                        <TextBlock Text="Scan" Margin="0,-2,0,0"/>
+                    </Button>
+                </Canvas>
+
+            </TabItem>
+
+            <TabItem Header="Bitmaper">
+                <Canvas>
+                    <Button Height="31" Width="91" Canvas.Left="380" Canvas.Top="10" Click="Tab_Bitmaper_Button_Generate_Click" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <TextBlock Text="Generate" />
+                    </Button>
+                    <ListBox Name="listbox_bitmaps" Height="352" Width="444" Canvas.Left="27" Canvas.Top="57" d:ItemsSource="{d:SampleData ItemCount=20}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{Binding bitmapImage}"  MaxHeight="10" MaxWidth="70" Stretch="UniformToFill"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                    </ListBox>
+
+                </Canvas>
+
+            </TabItem>
+
+
+        </TabControl>
+
+
+    </Canvas>
+
+
+</Window>
